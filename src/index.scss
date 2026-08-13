@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;700&display=swap");
+@import 'leaflet/dist/leaflet.css';
 
 // variables
 $background-color: #0f172a;
@@ -493,7 +494,7 @@ body {
       h3 {
         margin-top: 0;
         margin-bottom: $spacing / 4;
-        color: #333 !important; // Dark gray for readability
+        color: $body-font-color;
       }
 
       p {
@@ -900,4 +901,39 @@ body {
     background-color: white !important;
     color: black !important;
   }
+}
+
+.leaflet-container {
+  background-color: #0f172a;
+}
+
+/* Styling for multiple events list */
+.multiple-events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.multiple-events-list .event-item {
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: 6px;
+  padding: 16px;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.6);
+  transition: all 0.2s ease;
+}
+
+.multiple-events-list .event-item:hover {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.8);
+  transform: translateY(-2px);
+}
+
+.multiple-events-list .event-item h3 {
+  color: #e2e8f0 !important;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
 }
