@@ -10,7 +10,6 @@ export default function App() {
     <>
       <Globe />
       <Intro />
-      <TimelineBar />
       <Details />
     </>
   );

@@ -49,6 +49,9 @@ export const initialState = {
   markers: transformedMarkers,
   events: events, // Keep original events data for detailed info
   start: false,
+  journeyPath: [], // Array of coordinates representing the path traveled
+  selectedPhase: null, // The chapter/phase currently being viewed
+  isMapTransitioning: false, // Flag to show the map during transitions
 };
 
 export function reducer(state, action) {
@@ -59,20 +62,88 @@ export function reducer(state, action) {
         ...state,
         hasLoaded: true,
       };
-    case 'START':
+    case 'START_CHAPTER': {
+      // Auto-focus the first chronological event of the selected phase
+      const phaseId = payload; // Expected to be 1, 2, 3, 4, or 5
+      const phaseEvents = state.events.filter(e => e.phase === phaseId);
+      const sortedEvents = [...phaseEvents].sort((a, b) => a.id - b.id);
+      const firstEvent = sortedEvents[0];
+      
+      const firstMarker = state.markers.find(m => {
+        if (m.id === firstEvent.id) return true;
+        if (m.eventsAtLocation) return m.eventsAtLocation.some(e => e.id === firstEvent.id);
+        return false;
+      });
+
+      const tempMarker = firstMarker ? {
+        ...firstMarker,
+        id: firstEvent.id,
+        phase: firstEvent.phase,
+        year: firstEvent.year,
+        city: firstEvent.location,
+        eventName: firstEvent.eventName,
+        description: firstEvent.description,
+        mediaUrl: firstEvent.mediaUrl,
+        sourceMedia: firstEvent.sourceMedia,
+        templateType: firstEvent.templateType,
+        references: firstEvent.references,
+        eventsAtLocation: undefined,
+      } : null;
+
       return {
         ...state,
         start: true,
+        selectedPhase: phaseId,
+        focusedMarker: tempMarker,
+        journeyPath: tempMarker ? [tempMarker.coordinates] : [],
+        isMapTransitioning: false, // Map is hidden when reading
       };
-    case 'FOCUS':
+    }
+    case 'START_TRANSITION':
+      return {
+        ...state,
+        isMapTransitioning: true,
+      };
+    case 'END_TRANSITION':
+      return {
+        ...state,
+        isMapTransitioning: false,
+      };
+    case 'FOCUS': {
+      // When focusing a new marker, add its coordinates to the journey path if different from last
+      const newCoords = payload?.coordinates;
+      let newJourneyPath = state.journeyPath || [];
+      if (newCoords) {
+        const lastCoords = newJourneyPath[newJourneyPath.length - 1];
+        if (!lastCoords || lastCoords[0] !== newCoords[0] || lastCoords[1] !== newCoords[1]) {
+          // Keep only the previous location and the new location to show a single segment
+          if (newJourneyPath.length > 0) {
+            newJourneyPath = [lastCoords, newCoords];
+          } else {
+            newJourneyPath = [newCoords];
+          }
+        }
+      }
       return {
         ...state,
         focusedMarker: payload,
+        journeyPath: payload ? newJourneyPath : [], // Reset path if unfocusing (payload is null)
       };
+    }
     case 'UNFOCUS':
       return {
         ...state,
         focusedMarker: null,
+        journeyPath: [],
+      };
+    case 'GO_HOME':
+      return {
+        ...state,
+        start: false,
+        focusedMarker: null,
+        selectedPhase: null,
+        journeyPath: [],
+        isMapTransitioning: false,
       };
     default:
       return state;

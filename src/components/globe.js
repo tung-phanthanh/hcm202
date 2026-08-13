@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Map, TileLayer, Marker, Tooltip } from 'react-leaflet';
+import { Map, TileLayer, Marker, Tooltip, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 
 import { useStateValue } from '../state';
@@ -17,7 +17,7 @@ L.Icon.Default.mergeOptions({
 });
 
 export default function Globe() {
-  const [{ markers, focusedMarker, hasLoaded, start }, dispatch] = useStateValue();
+  const [{ markers, focusedMarker, hasLoaded, start, journeyPath, isMapTransitioning }, dispatch] = useStateValue();
   const mapRef = useRef();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function Globe() {
       const map = mapRef.current.leafletElement;
       map.flyTo(focusedMarker.coordinates, 6, {
         animate: true,
-        duration: 1.5
+        duration: 2.0
       });
     }
   }, [focusedMarker]);
@@ -44,7 +44,19 @@ export default function Globe() {
   if (!hasLoaded) return null;
 
   return (
-    <div style={{ height: '100vh', width: '100vw', position: 'absolute', top: 0, left: 0, zIndex: 0 }}>
+    <div 
+      style={{ 
+        height: '100vh', 
+        width: '100vw', 
+        position: 'absolute', 
+        top: 0, 
+        left: 0, 
+        zIndex: 10,
+        opacity: (start && isMapTransitioning) ? 1 : 0,
+        pointerEvents: (start && isMapTransitioning) ? 'auto' : 'none',
+        transition: 'opacity 0.8s ease-in-out'
+      }}
+    >
       <Map 
         ref={mapRef}
         center={center} 
@@ -60,11 +72,17 @@ export default function Globe() {
           <Marker 
             key={marker.id} 
             position={marker.coordinates}
-            onClick={() => dispatch({ type: 'FOCUS', payload: marker })}
-          >
-            {!focusedMarker && <Tooltip>{marker.city}</Tooltip>}
-          </Marker>
+            interactive={false} // Enforce linear navigation, no clicking
+          />
         ))}
+        {start && journeyPath && journeyPath.length > 1 && (
+          <Polyline 
+            positions={journeyPath} 
+            color="#f59e0b" 
+            weight={4}
+            className="animated-path"
+          />
+        )}
       </Map>
     </div>
   );

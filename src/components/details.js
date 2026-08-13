@@ -113,40 +113,30 @@ function MediaDisplaySection({ focusedMarker, templateType = 'normal' }) {
     const displayDescription = useSynchronizedDescription ? descArray : [description];
 
     // Navigation buttons based on template type
-    const navButtonsClass = templateType === 'grid' ? 'grid-nav-buttons' : 'story-nav-buttons';
-    const tabsClass = templateType === 'grid' ? 'grid-tabs' : 'story-tabs';
-    const tabClass = templateType === 'grid' ? 'grid-tab' : 'story-tab';
+    const navButtonsClass = 'story-nav-buttons';
+    const tabsClass = 'story-tabs';
+    const tabClass = 'story-tab';
 
     // Calculate thumbnail carousel offset
     const calculateThumbnailOffset = (currentIdx, totalItems, type) => {
-      // Thumbnail size + gap
-      const thumbnailSize = type === 'grid' ? 45 : 40; // width of thumbnail
-      const gap = 6; // $spacing / 2 = 12px / 2 = 6px
+      const thumbnailSize = type === 'grid' ? 70 : 70; // width of thumbnail
+      const gap = 12; // gap
       const itemWidth = thumbnailSize + gap;
-
-      // Container width (approximate visible area)
-      // Assuming detail panel width is 35% of viewport, roughly 400-500px
-      const containerWidth = 400; // Approximate container width
+      const containerWidth = 600; // Approximate container width in full screen
       const visibleItems = Math.floor(containerWidth / itemWidth);
 
-      // Calculate offset to center current thumbnail
-      // If we have fewer items than visible, don't offset
       if (totalItems <= visibleItems) {
         return 0;
       }
 
-      // Calculate the position to center the current item
       const centerPosition = Math.floor(visibleItems / 2);
       let offset = 0;
 
       if (currentIdx < centerPosition) {
-        // Near the start, don't offset
         offset = 0;
       } else if (currentIdx >= totalItems - centerPosition) {
-        // Near the end, offset to show last items
         offset = -(totalItems - visibleItems) * itemWidth;
       } else {
-        // In the middle, center the current item
         offset = -(currentIdx - centerPosition) * itemWidth;
       }
 
@@ -211,25 +201,46 @@ function MediaDisplaySection({ focusedMarker, templateType = 'normal' }) {
                 </button>
               </div>
 
-              {/* Template-specific tabs with thumbnails */}
-              <div className={tabsClass}>
-                <div
-                  className={`${tabsClass}-track`}
-                  style={{
-                    transform: `translateX(${calculateThumbnailOffset(safeIndex, mediaArray.length, templateType)}px)`
-                  }}
-                >
-                  {mediaArray.map((mediaUrl, idx) => {
-                    // Generate thumbnail based on media type
-                    let thumbnailElement;
+              {/* Thumbnail Previews */}
+              {mediaArray.length > 1 && (
+                <div className={tabsClass}>
+                  <div
+                    className={`${tabsClass}-track`}
+                    style={{
+                      transform: `translateX(${calculateThumbnailOffset(safeIndex, mediaArray.length, templateType)}px)`
+                    }}
+                  >
+                    {mediaArray.map((mediaUrl, idx) => {
+                      let thumbnailElement;
 
-                    if (isYouTubeUrl(mediaUrl)) {
-                      const videoId = extractYouTubeVideoId(mediaUrl);
-                      if (videoId) {
-                        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+                      if (isYouTubeUrl(mediaUrl)) {
+                        const videoId = extractYouTubeVideoId(mediaUrl);
+                        if (videoId) {
+                          const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+                          thumbnailElement = (
+                            <img
+                              src={thumbnailUrl}
+                              alt={`Thumbnail ${idx + 1}`}
+                              className="thumbnail-image"
+                              onError={(e) => {
+                                e.target.style.display = 'none';
+                              }}
+                            />
+                          );
+                        }
+                      } else if (
+                        typeof mediaUrl === 'string' &&
+                        (mediaUrl.endsWith('.mp4') ||
+                          mediaUrl.endsWith('.mov') ||
+                          mediaUrl.endsWith('.avi'))
+                      ) {
+                        thumbnailElement = (
+                          <div className="thumbnail-video-icon">▶</div>
+                        );
+                      } else {
                         thumbnailElement = (
                           <img
-                            src={thumbnailUrl}
+                            src={normalizeMediaUrl(mediaUrl)}
                             alt={`Thumbnail ${idx + 1}`}
                             className="thumbnail-image"
                             onError={(e) => {
@@ -238,43 +249,20 @@ function MediaDisplaySection({ focusedMarker, templateType = 'normal' }) {
                           />
                         );
                       }
-                    } else if (
-                      typeof mediaUrl === 'string' &&
-                      (mediaUrl.endsWith('.mp4') ||
-                        mediaUrl.endsWith('.mov') ||
-                        mediaUrl.endsWith('.avi'))
-                    ) {
-                      // For video files, use a generic video icon as thumbnail
-                      thumbnailElement = (
-                        <div className="thumbnail-video-icon">▶</div>
-                      );
-                    } else {
-                      // For images, use the image as thumbnail
-                      thumbnailElement = (
-                        <img
-                          src={normalizeMediaUrl(mediaUrl)}
-                          alt={`Thumbnail ${idx + 1}`}
-                          className="thumbnail-image"
-                          onError={(e) => {
-                            e.target.style.display = 'none';
-                          }}
-                        />
-                      );
-                    }
 
-                    return (
-                      <div
-                        key={idx}
-                        className={`${tabClass} ${safeIndex === idx ? 'active' : ''
-                          }`}
-                        onClick={() => setCurrentIndex(idx)}
-                      >
-                        {thumbnailElement || <span>{idx + 1}</span>}
-                      </div>
-                    );
-                  })}
+                      return (
+                        <div
+                          key={idx}
+                          className={`${tabClass} ${safeIndex === idx ? 'active' : ''}`}
+                          onClick={() => setCurrentIndex(idx)}
+                        >
+                          {thumbnailElement || <span>{idx + 1}</span>}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         )}
@@ -325,12 +313,6 @@ function DetailPanel({
       <>
         {/* Vùng cuộn riêng để bookmark không bị overflow cắt */}
         <div className="detail-scroll">
-          <div className="header">
-            <Button
-              label="Quay về quả địa cầu"
-              onClick={() => dispatch({ type: 'FOCUS' })}
-            />
-          </div>
           <div className="detail-content">
             <h2 className="event-title">{focusedMarker.eventName || 'Historical Event'}</h2>
 
@@ -425,7 +407,16 @@ function DetailPanel({
                         references: nextEvent.references,
                         eventsAtLocation: undefined,
                       };
+                      
+                      // Bắt đầu chuyển cảnh: Ẩn nội dung chữ, Hiện bản đồ
+                      dispatch({ type: 'START_TRANSITION' });
+                      // Cập nhật tọa độ mới để bản đồ bay (flyTo) và vẽ đường nối
                       dispatch({ type: 'FOCUS', payload: tempMarker });
+                      
+                      // Sau 2.5s, ẩn bản đồ đi và hiện lại nội dung chữ mới
+                      setTimeout(() => {
+                        dispatch({ type: 'END_TRANSITION' });
+                      }, 2500);
                     }
                   }
                 }}
@@ -470,7 +461,7 @@ function DetailPanel({
 }
 
 export default function Details() {
-  const [{ focusedMarker, markers, events }, dispatch] = useStateValue();
+  const [{ focusedMarker, markers, events, isMapTransitioning }, dispatch] = useStateValue();
 
   const validatedEvents = events && Array.isArray(events) ? events : [];
   const validatedMarkers = markers && Array.isArray(markers) ? markers : [];
@@ -499,92 +490,30 @@ export default function Details() {
 
   let content;
   if (focusedMarker) {
-    const { eventsAtLocation } = focusedMarker || {};
-
-    // Handle multiple events at location
-    if (eventsAtLocation && eventsAtLocation.length > 1) {
-      // If multiple events at this location, show a list
-      content = (
-        <>
-          <div className="header">
-            <Button
-              label="Quay về quả địa cầu"
-              onClick={() => dispatch({ type: 'FOCUS' })}
-            />
-          </div>
-          <div className="content">
-            <h2>
-              Các sự kiện tại:{' '}
-              {eventsAtLocation[0]?.location || focusedMarker.city}
-            </h2>
-            <div className="multiple-events-list">
-              {eventsAtLocation.map((event) => (
-                <div
-                  key={event.id}
-                  className="event-item"
-                  onClick={() => {
-                    // Create a temporary marker with this specific event's data
-                    const tempMarker = {
-                      id: event.id,
-                      phase: event.phase,
-                      year: event.year,
-                      city: event.location,
-                      coordinates: focusedMarker.coordinates,
-                      eventName: event.eventName,
-                      description: event.description,
-                      mediaUrl: event.mediaUrl,
-                      sourceMedia: event.sourceMedia,
-                      quoteSource: event.quoteSource,
-                      templateType: event.templateType,
-                      references: event.references,
-                      value: focusedMarker.value,
-                    };
-                    dispatch({ type: 'FOCUS', payload: tempMarker });
-                  }}
-                >
-                  <h3>
-                    {event.eventName} ({event.year})
-                  </h3>
-                </div>
-              ))}
-            </div>
-          </div>
-        </>
-      );
-    } else {
-      // Single-event detail: always use DetailPanel so Fade has same child type (no flash on prev/next)
-      content = (
-        <DetailPanel
-          focusedMarker={focusedMarker}
-          dispatch={dispatch}
-          isReferencesOpen={isReferencesOpen}
-          setIsReferencesOpen={setIsReferencesOpen}
-          validatedEvents={validatedEvents}
-          validatedMarkers={validatedMarkers}
-        />
-      );
-    }
+    content = (
+      <DetailPanel
+        focusedMarker={focusedMarker}
+        dispatch={dispatch}
+        isReferencesOpen={isReferencesOpen}
+        setIsReferencesOpen={setIsReferencesOpen}
+        validatedEvents={validatedEvents}
+        validatedMarkers={validatedMarkers}
+      />
+    );
   }
 
   return (
     <>
-      {focusedMarker && (
-        <div
-          className="details-overlay"
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            zIndex: 999,
-            pointerEvents: 'auto' // This ensures the overlay blocks interaction
-          }}
-          onClick={() => dispatch({ type: 'FOCUS' })} // Close when clicking on overlay
-        />
-      )}
-      <Fade className="details" show={!!focusedMarker}>
-        {content}
+      <Fade className="details-full-screen" show={!!focusedMarker && !isMapTransitioning}>
+        <div className="historical-background" style={{ backgroundImage: 'url(./image/vietnam-pattern.jpg)' }}>
+          <button 
+            className="home-button-fixed"
+            onClick={() => dispatch({ type: 'GO_HOME' })}
+          >
+            &#8962; Trang chủ
+          </button>
+          {content}
+        </div>
       </Fade>
     </>
   );
