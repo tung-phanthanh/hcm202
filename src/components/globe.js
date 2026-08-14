@@ -98,7 +98,7 @@ export default function Globe() {
       if (!journeyPath || journeyPath.length <= 1) {
         map.flyTo(focusedMarker.coordinates, 6, {
           animate: true,
-          duration: 1.0
+          duration: 1.5
         });
       }
     }
@@ -146,7 +146,7 @@ export default function Globe() {
             weight={4}
             dashArray="10, 15"
             className="animated-path"
-            duration={mapTransitionDuration || 1000}
+            duration={mapTransitionDuration || 1500}
             mapRef={mapRef}
           />
         )}

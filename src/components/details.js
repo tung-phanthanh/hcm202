@@ -413,8 +413,8 @@ function DetailPanel({
                       const dx = tempMarker.coordinates[0] - focusedMarker.coordinates[0];
                       const dy = tempMarker.coordinates[1] - focusedMarker.coordinates[1];
                       const dist = Math.sqrt(dx * dx + dy * dy);
-                      // dist thường từ 1 đến 15 độ. 1 độ ~ 1 giây (1000ms). Tăng tốc độ: Min 1s, Max 3s.
-                      const calculatedDuration = Math.min(Math.max(1000, dist * 400), 3000);
+                      // dist thường từ 1 đến 15 độ. 1 độ ~ 1 giây (1000ms). Tăng tốc độ: Min 1.5s, Max 4s.
+                      const calculatedDuration = Math.min(Math.max(1500, dist * 600), 4000);
                       
                       // Bắt đầu chuyển cảnh: Ẩn nội dung chữ, Hiện bản đồ
                       dispatch({ type: 'START_TRANSITION', payload: calculatedDuration });
