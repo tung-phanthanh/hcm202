@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useStateValue } from '../state';
-import Button from './button';
 import Fade from './fade';
 import { normalizeMediaUrl } from '../utils/mediaUtils';
 import { extractYouTubeVideoId, isYouTubeUrl } from '../utils/youtubeUtils';
+import Tilt from './tilt';
+import Particles from './particles';
 
 export function getRandomMarker({ focusedMarker, markers }) {
   if (!markers || !Array.isArray(markers) || markers.length === 0) return null;
@@ -147,7 +148,7 @@ function MediaDisplaySection({ focusedMarker, templateType = 'normal' }) {
       <>
         {/* Media (image/video) from mediaUrl - template with navigation */}
         {mediaArray.length > 0 && (
-          <div className="media-container">
+          <Tilt tiltMaxAngleX={3} tiltMaxAngleY={3} scale={1.01} className="media-container">
             <div className={`${templateType}-container`}>
               <div className={navButtonsClass}>
                 <button
@@ -264,7 +265,7 @@ function MediaDisplaySection({ focusedMarker, templateType = 'normal' }) {
                 </div>
               )}
             </div>
-          </div>
+          </Tilt>
         )}
 
         {/* Detailed description - synchronized with media for story_scroll, static for others */}
@@ -312,7 +313,7 @@ function DetailPanel({
     return (
       <>
         {/* Vùng cuộn riêng để bookmark không bị overflow cắt */}
-        <div className="detail-scroll">
+        <div className="detail-scroll fade-up-text" key={`content-${focusedMarker.id}`}>
           <div className="detail-content">
             <h2 className="event-title">{focusedMarker.eventName || 'Historical Event'}</h2>
 
@@ -408,15 +409,22 @@ function DetailPanel({
                         eventsAtLocation: undefined,
                       };
                       
+                      // Tính toán khoảng cách (Euclidean) để ra thời lượng chạy
+                      const dx = tempMarker.coordinates[0] - focusedMarker.coordinates[0];
+                      const dy = tempMarker.coordinates[1] - focusedMarker.coordinates[1];
+                      const dist = Math.sqrt(dx * dx + dy * dy);
+                      // dist thường từ 1 đến 15 độ. 1 độ ~ 1 giây (1000ms). Min 2.5s, Max 8s.
+                      const calculatedDuration = Math.min(Math.max(2500, dist * 1000), 8000);
+                      
                       // Bắt đầu chuyển cảnh: Ẩn nội dung chữ, Hiện bản đồ
-                      dispatch({ type: 'START_TRANSITION' });
-                      // Cập nhật tọa độ mới để bản đồ bay (flyTo) và vẽ đường nối
+                      dispatch({ type: 'START_TRANSITION', payload: calculatedDuration });
+                      // Cập nhật tọa độ mới để vẽ đường nối
                       dispatch({ type: 'FOCUS', payload: tempMarker });
                       
-                      // Sau 2.5s, ẩn bản đồ đi và hiện lại nội dung chữ mới
+                      // Sau khi chạy xong khoảng cách đó, ẩn bản đồ đi và hiện lại nội dung chữ mới
                       setTimeout(() => {
                         dispatch({ type: 'END_TRANSITION' });
-                      }, 2500);
+                      }, calculatedDuration);
                     }
                   }
                 }}
@@ -462,6 +470,13 @@ function DetailPanel({
 
 export default function Details() {
   const [{ focusedMarker, markers, events, isMapTransitioning }, dispatch] = useStateValue();
+  const [bgOffset, setBgOffset] = useState({ x: 50, y: 50 });
+
+  const handleMouseMove = (e) => {
+    const x = (e.clientX / window.innerWidth) * 10 - 5;
+    const y = (e.clientY / window.innerHeight) * 10 - 5;
+    setBgOffset({ x: 50 + x, y: 50 + y });
+  };
 
   const validatedEvents = events && Array.isArray(events) ? events : [];
   const validatedMarkers = markers && Array.isArray(markers) ? markers : [];
@@ -505,7 +520,15 @@ export default function Details() {
   return (
     <>
       <Fade className="details-full-screen" show={!!focusedMarker && !isMapTransitioning}>
-        <div className="historical-background" style={{ backgroundImage: 'url(./image/vietnam-pattern.jpg)' }}>
+        <div 
+          className="historical-background parallax-bg" 
+          style={{ 
+            backgroundImage: 'url(./image/vietnam-pattern.jpg)',
+            backgroundPosition: `${bgOffset.x}% ${bgOffset.y}%`
+          }}
+          onMouseMove={handleMouseMove}
+        >
+          <Particles />
           <button 
             className="home-button-fixed"
             onClick={() => dispatch({ type: 'GO_HOME' })}

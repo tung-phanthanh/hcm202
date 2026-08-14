@@ -103,6 +103,7 @@ export function reducer(state, action) {
       return {
         ...state,
         isMapTransitioning: true,
+        mapTransitionDuration: payload || 2500,
       };
     case 'END_TRANSITION':
       return {

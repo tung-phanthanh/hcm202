@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Fade from './fade';
 import { useStateValue } from '../state';
+import Tilt from './tilt';
+import Particles from './particles';
 
 export default function Intro() {
   const [{ start }, dispatch] = useStateValue();
+  const [bgOffset, setBgOffset] = useState({ x: 50, y: 50 });
 
   const chapters = [
     { id: 1, title: 'Thời niên thiếu & Ra đi tìm đường cứu nước (1890 - 1911)' },
@@ -13,25 +16,41 @@ export default function Intro() {
     { id: 5, title: 'Hoàn thiện & Phát triển (1945 - 1969)' }
   ];
 
+  const handleMouseMove = (e) => {
+    // Calculate a small offset based on mouse position for parallax
+    const x = (e.clientX / window.innerWidth) * 10 - 5; // -5 to 5
+    const y = (e.clientY / window.innerHeight) * 10 - 5; // -5 to 5
+    setBgOffset({ x: 50 + x, y: 50 + y });
+  };
+
   return (
     <Fade className="intro" show={!start}>
-      <div className="intro-background" style={{ backgroundImage: 'url(./image/vietnam-pattern.jpg)' }}>
-        <div className="intro-content">
+      <div 
+        className="intro-background parallax-bg" 
+        style={{ 
+          backgroundImage: 'url(./image/vietnam-pattern.jpg)',
+          backgroundPosition: `${bgOffset.x}% ${bgOffset.y}%`
+        }}
+        onMouseMove={handleMouseMove}
+      >
+        <Particles />
+        <Tilt className="intro-content">
           <h1>Quá trình hình thành tư tưởng Hồ Chí Minh</h1>
           <p className="intro-subtitle">Khám phá hành trình vĩ đại qua 5 giai đoạn lịch sử</p>
           <div className="chapter-list">
             {chapters.map(chapter => (
-              <button 
-                key={chapter.id} 
-                className="chapter-btn"
-                onClick={() => dispatch({ type: 'START_CHAPTER', payload: chapter.id })}
-              >
-                <span className="chapter-number">Chương {chapter.id}</span>
-                <span className="chapter-title">{chapter.title}</span>
-              </button>
+              <Tilt key={chapter.id} tiltMaxAngleX={5} tiltMaxAngleY={5} scale={1.05}>
+                <button 
+                  className="chapter-btn"
+                  onClick={() => dispatch({ type: 'START_CHAPTER', payload: chapter.id })}
+                >
+                  <span className="chapter-number">Chương {chapter.id}</span>
+                  <span className="chapter-title">{chapter.title}</span>
+                </button>
+              </Tilt>
             ))}
           </div>
-        </div>
+        </Tilt>
       </div>
     </Fade>
   );

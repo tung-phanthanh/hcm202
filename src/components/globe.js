@@ -16,8 +16,68 @@ L.Icon.Default.mergeOptions({
   shadowUrl,
 });
 
+// A custom component that animates drawing a line from A to B
+function AnimatedPolyline({ positions, color, weight, dashArray, className, duration = 2000, mapRef }) {
+  const [currentPos, setCurrentPos] = React.useState(null);
+  const [isDrawing, setIsDrawing] = React.useState(true);
+
+  React.useEffect(() => {
+    if (!positions || positions.length < 2) return;
+    
+    const start = positions[0];
+    const end = positions[positions.length - 1];
+    
+    // Reset to start
+    setCurrentPos(start);
+    setIsDrawing(true);
+    
+    let startTime = null;
+    let animationFrameId;
+
+    const animate = (time) => {
+      if (!startTime) startTime = time;
+      const progress = Math.min((time - startTime) / duration, 1);
+      
+      // Interpolate lat and lng
+      const lat = start[0] + (end[0] - start[0]) * progress;
+      const lng = start[1] + (end[1] - start[1]) * progress;
+      
+      const pos = [lat, lng];
+      setCurrentPos(pos);
+      
+      if (mapRef && mapRef.current) {
+        mapRef.current.leafletElement.panTo(pos, { animate: false });
+      }
+      
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(animate);
+      } else {
+        setIsDrawing(false);
+      }
+    };
+    
+    animationFrameId = requestAnimationFrame(animate);
+    
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [positions, duration, mapRef]);
+
+  if (!positions || positions.length < 2 || !currentPos) return null;
+
+  return (
+    <Polyline 
+      positions={[positions[0], currentPos]} 
+      color={color} 
+      weight={weight}
+      dashArray={dashArray}
+      className={isDrawing ? 'animated-path-drawing' : className}
+    />
+  );
+}
+
 export default function Globe() {
-  const [{ markers, focusedMarker, hasLoaded, start, journeyPath, isMapTransitioning }, dispatch] = useStateValue();
+  const [{ markers, focusedMarker, hasLoaded, start, journeyPath, isMapTransitioning, mapTransitionDuration }, dispatch] = useStateValue();
   const mapRef = useRef();
 
   useEffect(() => {
@@ -34,12 +94,15 @@ export default function Globe() {
   useEffect(() => {
     if (mapRef.current && focusedMarker) {
       const map = mapRef.current.leafletElement;
-      map.flyTo(focusedMarker.coordinates, 6, {
-        animate: true,
-        duration: 2.0
-      });
+      // Chỉ flyTo nếu KHÔNG CÓ hoạt ảnh vẽ đường (tức là không phải chuyển sự kiện)
+      if (!journeyPath || journeyPath.length <= 1) {
+        map.flyTo(focusedMarker.coordinates, 6, {
+          animate: true,
+          duration: 2.5
+        });
+      }
     }
-  }, [focusedMarker]);
+  }, [focusedMarker, journeyPath]);
 
   if (!hasLoaded) return null;
 
@@ -76,11 +139,15 @@ export default function Globe() {
           />
         ))}
         {start && journeyPath && journeyPath.length > 1 && (
-          <Polyline 
+          <AnimatedPolyline 
+            key={journeyPath.map(p => p.join(',')).join('-')}
             positions={journeyPath} 
             color="#f59e0b" 
             weight={4}
+            dashArray="10, 15"
             className="animated-path"
+            duration={mapTransitionDuration || 2500}
+            mapRef={mapRef}
           />
         )}
       </Map>
