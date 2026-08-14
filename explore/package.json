@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI=false react-scripts build"
+    "build": "react-scripts build"
   },
   "dependencies": {
     "@types/react": "^16.9.45",
