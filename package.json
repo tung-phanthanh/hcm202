@@ -23,9 +23,9 @@
     "history"
   ],
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build"
-  },
+  "start": "react-scripts start",
+  "build": "CI=false react-scripts build"
+},
   "dependencies": {
     "@types/react": "^16.9.45",
     "@types/react-dom": "^16.9.8",
