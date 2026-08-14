@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "question": "Yếu tố nào giữ vai trò quyết định đến việc định hình bản chất cách mạng và khoa học của Tư tưởng Hồ Chí Minh?",
+    "options": [
+      "A. Truyền thống yêu nước của dân tộc Việt Nam",
+      "B. Tinh hoa văn hóa phương Đông và phương Tây",
+      "C. Chủ nghĩa Mác - Lênin",
+      "D. Phẩm chất cá nhân của Hồ Chí Minh"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Chủ nghĩa Mác - Lênin là cơ sở lý luận trực tiếp và quyết định bản chất cách mạng, khoa học của Tư tưởng Hồ Chí Minh."
+  },
+  {
+    "id": 2,
+    "question": "Nguồn gốc lý luận xuất phát điểm, đóng vai trò là động lực lực thúc đẩy Nguyễn Ái Quốc ra đi tìm đường cứu nước là gì?",
+    "options": [
+      "A. Lòng yêu nước và truyền thống đoàn kết của dân tộc Việt Nam",
+      "B. Tư tưởng Tự do - Bình đẳng - Bác ái của Cách mạng Pháp",
+      "C. Triết lý hành động của Nho giáo",
+      "D. Luận cương của Lênin về vấn đề dân tộc và thuộc địa"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Chủ nghĩa yêu nước truyền thống là ngọn nguồn đầu tiên, là động lực gốc rễ dẫn dắt Bác ra đi tìm con đường cứu nước mới."
+  },
+  {
+    "id": 3,
+    "question": "Sự kiện nào đánh dấu bước chuyển biến về chất trong tư tưởng Nguyễn Ái Quốc – từ một người yêu nước trở thành một người cộng sản?",
+    "options": [
+      "A. Rời cảng Nhà Rồng ra đi tìm đường cứu nước (1911)",
+      "B. Gửi bản Yêu sách của nhân dân An Nam tới Hội nghị Véc-xây (1919)",
+      "C. Đọc Luận cương của Lênin và bỏ phiếu tán thành gia nhập Quốc tế III (12/1920)",
+      "D. Chủ trì Hội nghị thành lập Đảng Cộng sản Việt Nam (1/1930)"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Tại Đại hội Tour (12/1920), Nguyễn Ái Quốc bỏ phiếu tán thành gia nhập Quốc tế III và tham gia sáng lập Đảng Cộng sản Pháp, đánh dấu sự chuyển biến từ chủ nghĩa yêu nước sang chủ nghĩa cộng sản."
+  },
+  {
+    "id": 4,
+    "question": "Hồ Chí Minh đã tiếp thu những hạt nhân hợp lý nào từ Nho giáo?",
+    "options": [
+      "A. Tư tưởng vị tha, từ bi, bác ái, cứu khổ cứu nạn",
+      "B. Triết lý hành động, nhập thế, hành đạo, giúp đời, tu thân",
+      "C. Quan niệm về chủ nghĩa Tam dân (Dân tộc, Dân quyền, Dân sinh)",
+      "D. Tư tưởng dân chủ tư sản và quyền con người"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Bác tiếp thu từ Nho giáo tinh thần triết lý hành động, tu thân tích cực, đề cao đạo đức cá nhân và tinh thần hành đạo giúp đời."
+  },
+  {
+    "id": 5,
+    "question": "Nguyên nhân cốt lõi dẫn đến sự thất bại của các phong trào yêu nước chống Pháp cuối thế kỷ XIX - đầu thế kỷ XX ở Việt Nam là gì?",
+    "options": [
+      "A. Dân ta thiếu lòng yêu nước và tinh thần dũng cảm",
+      "B. Khủng hoảng về đường lối cứu nước và giai cấp lãnh đạo cách mạng",
+      "C. Thực dân Pháp quá mạnh và có vũ khí hiện đại",
+      "D. Không nhận được sự ủng hộ từ bạn bè quốc tế"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Các phong trào phong kiến (Cần Vương) hay dân chủ tư sản (Phan Bội Châu, Phan Châu Trinh) đều bế tắc do thiếu một đường lối cứu nước khoa học và một giai cấp tiên phong lãnh đạo."
+  },
+  {
+    "id": 6,
+    "question": "Giai đoạn 1911 – 1920 trong quá trình hình thành TTHCM được xác định là thời kỳ nào?",
+    "options": [
+      "A. Hình thành tư tưởng yêu nước và chí hướng cứu nước",
+      "B. Tìm thấy con đường cứu nước, giải phóng dân tộc",
+      "C. Hình thành cơ bản tư tưởng về cách mạng Việt Nam",
+      "D. Phát triển và hoàn thiện tư tưởng kháng chiến, kiến quốc"
+    ],
+    "correctAnswer": 1,
+    "explanation": "1911 – 1920 là giai đoạn Bác bôn ba qua nhiều nước và kết thúc bằng việc tìm ra con đường cứu nước theo con đường cách mạng vô sản (1920)."
+  },
+  {
+    "id": 7,
+    "question": "Tác phẩm nào của Nguyễn Ái Quốc được coi là sự chuẩn bị toàn diện về tư tưởng, lý luận và tổ chức cho sự ra đời của Đảng Cộng sản Việt Nam?",
+    "options": [
+      "A. Bản án chế độ thực dân Pháp (1925)",
+      "B. Đường Kách mệnh (1927)",
+      "C. Chánh cương sách lược tắt (1930)",
+      "D. Tuyên ngôn Độc lập (1945)"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Tác phẩm Đường Kách mệnh tập hợp các bài giảng của Bác tại Quảng Châu, là tài liệu huấn luyện cán bộ, chuẩn bị trực tiếp về lý luận cho việc thành lập Đảng."
+  },
+  {
+    "id": 8,
+    "question": "Giá trị tư tưởng tích cực nào của Phật giáo được Hồ Chí Minh tiếp thu và phát triển?",
+    "options": [
+      "A. Tinh thần từ bi, bác ái, cứu khổ cứu nạn, thương người như thể thương thân",
+      "B. Tinh thần pháp trị và kỷ cương xã hội",
+      "C. Tư tưởng phân chia đẳng cấp xã hội",
+      "D. Đề cao vai trò tuyệt đối của số phận và thần linh"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Bác trân trọng ở Phật giáo tư tưởng vị tha, từ bi, yêu thương con người và tinh thần bình đẳng, hướng thiện."
+  },
+  {
+    "id": 9,
+    "question": "Theo Hồ Chí Minh, ưu điểm lớn nhất của chủ nghĩa Mác là gì?",
+    "options": [
+      "A. Lòng nhân ái bao la",
+      "B. Phương pháp làm việc biện chứng và khoa học",
+      "C. Tinh thần tu thân tích cực",
+      "D. Sự hòa hợp giữa con người và thiên nhiên"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Hồ Chí Minh từng nhận xét: Ưu điểm lớn nhất của chủ nghĩa Mác là \"phương pháp làm việc diệu kỳ\" (phương pháp luận biện chứng duy vật)."
+  },
+  {
+    "id": 10,
+    "question": "Hồ Chí Minh đã tiếp thu hạt nhân tư tưởng nào từ Chủ nghĩa Tam dân của Tôn Trung Sơn?",
+    "options": [
+      "A. Dân tộc độc lập, Dân quyền tự do, Dân sinh hạnh phúc",
+      "B. Tự do, Bình đẳng, Bác ái",
+      "C. Nhân ái, Hòa bình, Hợp tác",
+      "D. Quân chủ lập hiến và cải cách xã hội"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Bác nhận thấy trong Chủ nghĩa Tam dân của Tôn Trung Sơn những điểm phù hợp với điều kiện cách mạng Việt Nam: Độc lập – Tự do – Hạnh phúc."
+  },
+  {
+    "id": 11,
+    "question": "Sự kiện lịch sử thế giới nào năm 1917 đã tác động mạnh mẽ, mở ra thời đại mới và ảnh hưởng sâu sắc đến quyết định chọn con đường cứu nước của Bác?",
+    "options": [
+      "A. Chiến tranh thế giới thứ nhất bùng nổ",
+      "B. Thắng lợi của Cách mạng Tháng Mười Nga",
+      "C. Quốc tế Cộng sản (Quốc tế III) được thành lập",
+      "D. Cách mạng Tân Hợi ở Trung Quốc thành công"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Cách mạng Tháng Mười Nga (1917) không chỉ giải phóng giai cấp mà còn giải phóng các dân tộc bị áp bức, mở ra thời đại mới cho cách mạng giải phóng dân tộc."
+  },
+  {
+    "id": 12,
+    "question": "Giai đoạn 1930 – 1945 trong sự hình thành TTHCM mang đặc điểm nổi bật nào?",
+    "options": [
+      "A. Thời kỳ tìm thấy con đường cứu nước",
+      "B. Thời kỳ thử thách, kiên trì giữ vững đường lối cách mạng đúng đắn, sáng tạo",
+      "C. Thời kỳ bổ sung, phát triển tư tưởng về chủ nghĩa xã hội",
+      "D. Thời kỳ hình thành tư tưởng yêu nước ban đầu"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Giai đoạn 1930–1945 là lúc TTHCM trải qua thử thách gay gắt do những quan điểm \"tả khuynh\" của Quốc tế Cộng sản, nhưng Bác vẫn kiên trì giữ vững đường lối đặt nhiệm vụ giải phóng dân tộc lên hàng đầu."
+  },
+  {
+    "id": 13,
+    "question": "Bản \"Yêu sách của nhân dân An Nam\" do Nguyễn Ái Quốc thay mặt Hội những người An Nam yêu nước gửi tới Hội nghị Véc-xây diễn ra vào năm nào?",
+    "options": [
+      "A. 1911",
+      "B. 1917",
+      "C. 1919",
+      "D. 1920"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Ngày 18/6/1919, Bác gửi bản Yêu sách 8 điểm tới Hội nghị Véc-xây đòi quyền tự do, tối thiểu cho nhân dân Việt Nam."
+  },
+  {
+    "id": 14,
+    "question": "Trong các nhân tố chủ quan hình thành TTHCM, nhân tố nào giữ vai trò quyết định đến năng lực nhận thức và sáng tạo của Người?",
+    "options": [
+      "A. Xuất thân từ gia đình nhà nho nghèo ở Nghệ An",
+      "B. Tư duy độc lập, tự chủ, sáng tạo và lòng yêu nước, thương dân nhiệt thành",
+      "C. Sự giúp đỡ tài chính từ bạn bè quốc tế",
+      "D. Sự tác động của môi trường quê hương Bình Trị Thiên"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Tư duy độc lập, tự chủ, sáng tạo kết hợp với hoài bão cứu nước cứu dân là phẩm chất cá nhân quyết định giúp Bác tiếp thu và biến lý luận thành đường lối thực tiễn."
+  },
+  {
+    "id": 15,
+    "question": "Văn kiện nào do Nguyễn Ái Quốc soạn thảo được thông qua tại Hội nghị thành lập Đảng (1930) được coi là Cương lĩnh chính trị đầu tiên của Đảng?",
+    "options": [
+      "A. Bản án chế độ thực dân Pháp",
+      "B. Đường Kách mệnh",
+      "C. Chánh cương sách lược tắt, Sách lược tắt",
+      "D. Luận cương chính trị tháng 10/1930"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Chánh cương sách lược tắt và Sách lược tắt do Bác soạn thảo đầu năm 1930 chính là Cương lĩnh chính trị đầu tiên của Đảng Cộng sản Việt Nam."
+  },
+  {
+    "id": 16,
+    "question": "Hồ Chí Minh đã tiếp thu giá trị tiến bộ nào từ Tuyên ngôn Độc lập (1776) của Mỹ và Tuyên ngôn Nhân quyền & Dân quyền (1789) của Pháp?",
+    "options": [
+      "A. Lý luận về đường lối bạo lực cách mạng",
+      "B. Tư tưởng về quyền con người, quyền tự do, bình đẳng và quyền sống",
+      "C. Mô hình xây dựng chủ nghĩa xã hội",
+      "D. Phương pháp tổ chức quần chúng nhân dân"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Bác đã kế thừa các giá trị quyền con người trong hai bản Tuyên ngôn phương Tây và nâng phát triển thành quyền tự do, độc lập của các dân tộc."
+  },
+  {
+    "id": 17,
+    "question": "Giai đoạn 1945 – 1969 có nội dung trọng tâm nào trong quá trình phát triển Tư tưởng Hồ Chí Minh?",
+    "options": [
+      "A. Định hình tư tưởng cứu nước ban đầu",
+      "B. Khảo sát thực tiễn phương Tây để tìm con đường cứu nước",
+      "C. Bổ sung, phát triển và hoàn thiện tư tưởng về kháng chiến và kiến quốc (xây dựng CNXH)",
+      "D. Đấu tranh bảo vệ quan điểm cách mạng giải phóng dân tộc trong Quốc tế Cộng sản"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Đây là thời kỳ Bác cùng Đảng lãnh đạo nhân dân vừa kháng chiến chống Pháp/Mỹ, vừa kiến quốc (xây dựng Chủ nghĩa xã hội ở miền Bắc)."
+  },
+  {
+    "id": 18,
+    "question": "Sự khác biệt căn bản trong hướng đi tìm đường cứu nước của Nguyễn Ái Quốc (1911) so với các bậc tiền bối (Phan Bội Châu, Phan Châu Trinh) là gì?",
+    "options": [
+      "A. Đi sang phương Đông (Nhật Bản, Trung Quốc) để nhờ cậy viện trợ",
+      "B. Đi sang phương Tây (sang chính nước Pháp) để tìm hiểu bản chất kẻ thù và các nước phát triển",
+      "C. Dựa vào lực lượng phong kiến trong nước",
+      "D. Sang Nga ngay từ năm 1911 để học tập mô hình Xô Viết"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Các tiền bối đi sang phương Đông (Đông Du), còn Bác quyết định sang phương Tây xem các nước làm thế nào rồi trở về giúp đồng bào."
+  },
+  {
+    "id": 19,
+    "question": "Tiền đề tư tưởng - lý luận nào là quan trọng nhất đóng vai trò nền tảng cho sự hình thành Tư tưởng Hồ Chí Minh?",
+    "options": [
+      "A. Truyền thống văn hóa dân tộc Việt Nam",
+      "B. Tinh hoa văn hóa phương Đông và phương Tây",
+      "C. Chủ nghĩa Mác - Lênin",
+      "D. Các học thuyết triết học cổ đại"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Tuy truyền thống dân tộc là xuất phát điểm, nhưng Chủ nghĩa Mác - Lênin mới là tiền đề lý luận quyết định nhất định hình toàn bộ hệ thống tư tưởng khoa học của Người."
+  },
+  {
+    "id": 20,
+    "question": "Ý nghĩa lịch sử của Tư tưởng Hồ Chí Minh đối với dân tộc Việt Nam là gì?",
+    "options": [
+      "A. Là tài sản tinh thần vô giá, soi đường cho sự nghiệp giải phóng dân tộc và phát triển đất nước",
+      "B. Chỉ có giá trị trong giai đoạn chiến tranh giải phóng dân tộc",
+      "C. Thay thế hoàn toàn chủ nghĩa Mác - Lênin tại Việt Nam",
+      "D. Là công trình lý luận mang tính lý thuyết suông, khó áp dụng vào thực tiễn"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Tư tưởng Hồ Chí Minh là tài sản tinh thần vô giá của Đảng và dân tộc, mãi mãi soi đường cho sự nghiệp cách mạng của nhân dân Việt Nam."
+  }
+]

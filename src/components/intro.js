@@ -5,8 +5,9 @@ import Tilt from './tilt';
 import Particles from './particles';
 
 export default function Intro() {
-  const [{ start }, dispatch] = useStateValue();
+  const [{ start, isQuizOpen }, dispatch] = useStateValue();
   const [bgOffset, setBgOffset] = useState({ x: 50, y: 50 });
+  const [showChapters, setShowChapters] = useState(false);
 
   const chapters = [
     { id: 1, title: 'Thời niên thiếu & Ra đi tìm đường cứu nước (1890 - 1911)' },
@@ -24,7 +25,7 @@ export default function Intro() {
   };
 
   return (
-    <Fade className="intro" show={!start}>
+    <Fade className="intro" show={!start && !isQuizOpen}>
       <div 
         className="intro-background parallax-bg" 
         style={{ 
@@ -37,19 +38,54 @@ export default function Intro() {
         <Tilt className="intro-content">
           <h1>Quá trình hình thành tư tưởng Hồ Chí Minh</h1>
           <p className="intro-subtitle">Khám phá hành trình vĩ đại qua 5 giai đoạn lịch sử</p>
-          <div className="chapter-list">
-            {chapters.map(chapter => (
-              <Tilt key={chapter.id} tiltMaxAngleX={5} tiltMaxAngleY={5} scale={1.05}>
+          
+          {!showChapters ? (
+            <div className="main-choices">
+              <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} scale={1.05}>
                 <button 
-                  className="chapter-btn"
-                  onClick={() => dispatch({ type: 'START_CHAPTER', payload: chapter.id })}
+                  className="main-choice-btn chapter-choice"
+                  onClick={() => setShowChapters(true)}
                 >
-                  <span className="chapter-number">Chương {chapter.id}</span>
-                  <span className="chapter-title">{chapter.title}</span>
+                  <div className="choice-icon">🗺️</div>
+                  <h2>Khám phá hành trình</h2>
+                  <p>Học qua bản đồ và các cột mốc lịch sử</p>
                 </button>
               </Tilt>
-            ))}
-          </div>
+              
+              <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} scale={1.05}>
+                <button 
+                  className="main-choice-btn quiz-choice"
+                  onClick={() => dispatch({ type: 'START_QUIZ' })}
+                >
+                  <div className="choice-icon">📝</div>
+                  <h2>Thử tài kiến thức</h2>
+                  <p>Làm bài trắc nghiệm 20 câu hỏi ôn tập</p>
+                </button>
+              </Tilt>
+            </div>
+          ) : (
+            <div className="chapter-selection fade-in">
+              <button className="back-btn" onClick={() => setShowChapters(false)}>
+                &#8592; Quay lại
+              </button>
+              <div className="chapter-list">
+                {chapters.map(chapter => (
+                  <Tilt key={chapter.id} tiltMaxAngleX={5} tiltMaxAngleY={5} scale={1.05}>
+                    <button 
+                      className="chapter-btn"
+                      onClick={() => {
+                        dispatch({ type: 'START_CHAPTER', payload: chapter.id });
+                        setTimeout(() => setShowChapters(false), 1000); // Reset for next time
+                      }}
+                    >
+                      <span className="chapter-number">Chương {chapter.id}</span>
+                      <span className="chapter-title">{chapter.title}</span>
+                    </button>
+                  </Tilt>
+                ))}
+              </div>
+            </div>
+          )}
         </Tilt>
       </div>
     </Fade>

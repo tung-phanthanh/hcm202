@@ -52,6 +52,7 @@ export const initialState = {
   journeyPath: [], // Array of coordinates representing the path traveled
   selectedPhase: null, // The chapter/phase currently being viewed
   isMapTransitioning: false, // Flag to show the map during transitions
+  isQuizOpen: false, // Flag to show the quiz
 };
 
 export function reducer(state, action) {
@@ -61,6 +62,16 @@ export function reducer(state, action) {
       return {
         ...state,
         hasLoaded: true,
+      };
+    case 'START_QUIZ':
+      return {
+        ...state,
+        isQuizOpen: true,
+      };
+    case 'CLOSE_QUIZ':
+      return {
+        ...state,
+        isQuizOpen: false,
       };
     case 'START_CHAPTER': {
       // Auto-focus the first chronological event of the selected phase
@@ -145,6 +156,7 @@ export function reducer(state, action) {
         selectedPhase: null,
         journeyPath: [],
         isMapTransitioning: false,
+        isQuizOpen: false,
       };
     default:
       return state;
