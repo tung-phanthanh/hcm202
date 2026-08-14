@@ -23,8 +23,9 @@
     "history"
   ],
   "scripts": {
-    "start": "react-scripts start",
-    "build": "CI=false react-scripts build"
+    "build:explore": "cd explore && npm install --legacy-peer-deps && npm run build && node -e \"require('fs').cpSync('./build', '../public/explore', {recursive: true, force: true})\"",
+    "start": "npm run build:explore && react-scripts start",
+    "build": "npm run build:explore && CI=false react-scripts build"
   },
   "dependencies": {
     "@types/react": "^16.9.45",

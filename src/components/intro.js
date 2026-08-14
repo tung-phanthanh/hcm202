@@ -62,6 +62,17 @@ export default function Intro() {
                   <p>Làm bài trắc nghiệm 20 câu hỏi ôn tập</p>
                 </button>
               </Tilt>
+
+              <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} scale={1.05}>
+                <button 
+                  className="main-choice-btn explore-choice"
+                  onClick={() => window.location.href = '/explore'}
+                >
+                  <div className="choice-icon">🌍</div>
+                  <h2>Tự do khám phá</h2>
+                  <p>Trải nghiệm bản đồ 3D tương tác không giới hạn</p>
+                </button>
+              </Tilt>
             </div>
           ) : (
             <div className="chapter-selection fade-in">
