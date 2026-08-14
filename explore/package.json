@@ -1,0 +1,69 @@
+{
+  "private": true,
+  "name": "hcm-thought-globe",
+  "version": "1.0.0",
+  "description": "Interactive visualization of Ho Chi Minh Thought journey across the globe.",
+  "license": "MIT",
+  "homepage": "./",
+  "repository": "",
+  "bugs": "",
+  "author": "",
+  "keywords": [
+    "hoc-chi-minh",
+    "globe",
+    "thought",
+    "react-globe",
+    "react",
+    "three",
+    "threejs",
+    "webgl",
+    "visualization",
+    "interactive",
+    "earth",
+    "history"
+  ],
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "CI=false react-scripts build"
+  },
+  "dependencies": {
+    "@types/react": "^16.9.45",
+    "@types/react-dom": "^16.9.8",
+    "ajv": "^8.17.1",
+    "ajv-keywords": "^5.1.0",
+    "moment": "^2.30.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-globe": "^5.0.2",
+    "react-scripts": "5.0.1",
+    "sass": "^1.97.3",
+    "three": "^0.119.1",
+    "typescript": "^4.9.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "rimraf": "^6.1.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "prettier/prettier": "off"
+    }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
