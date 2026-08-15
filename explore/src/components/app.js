@@ -4,6 +4,7 @@ import Details from './details';
 import Globe from './globe';
 import Intro from './intro';
 import TimelineBar from './timeline-bar';
+import Chatbot from './chatbot';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
       <Intro />
       <TimelineBar />
       <Details />
+      <Chatbot />
       <button 
         className="home-button-fixed" 
         onClick={() => window.location.href = '/'}
