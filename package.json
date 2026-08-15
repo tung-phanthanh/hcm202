@@ -28,7 +28,7 @@
     "build": "npm run build:explore && CI=false react-scripts build"
   },
   "dependencies": {
-    "@google/genai": "^2.17.1",
+    "@google/generative-ai": "^0.24.1",
     "@types/react": "^16.9.45",
     "@types/react-dom": "^16.9.8",
     "ajv": "^8.17.1",

@@ -1,4 +1,4 @@
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export default async function handler(req, res) {
   // Only allow POST requests
@@ -13,8 +13,12 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Question is required' });
     }
 
-    // Initialize the SDK. It automatically picks up GEMINI_API_KEY from environment variables.
-    const ai = new GoogleGenAI();
+    if (!process.env.GEMINI_API_KEY) {
+      return res.status(500).json({ error: 'GEMINI_API_KEY is not configured on the server.' });
+    }
+
+    // Initialize the SDK
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
     // Construct a strict system prompt
     const systemInstruction = `You are a knowledgeable, respectful, and highly accurate historian expert specializing in the life, revolutionary journey, and ideology of Ho Chi Minh (Bác Hồ).
@@ -30,16 +34,19 @@ RULES:
 4. Use this context to understand what they are referring to if they use pronouns like "this event", "here", "at that time".
 5. Keep your answers concise, informative, and suitable for a web chat interface. Format your answer in Vietnamese.`;
 
-    const response = await ai.models.generateContent({
+    const model = genAI.getGenerativeModel({ 
       model: 'gemini-2.5-flash',
-      contents: question,
-      config: {
-        systemInstruction: systemInstruction,
+      systemInstruction: systemInstruction 
+    });
+
+    const result = await model.generateContent({
+      contents: [{ role: 'user', parts: [{ text: question }] }],
+      generationConfig: {
         temperature: 0.2, // Low temperature for factual accuracy
       }
     });
 
-    return res.status(200).json({ answer: response.text });
+    return res.status(200).json({ answer: result.response.text() });
   } catch (error) {
     console.error('Error in /api/ask:', error);
     return res.status(500).json({ error: 'Internal server error', details: error.message });
