@@ -66,7 +66,7 @@ export default function Intro() {
               <Tilt tiltMaxAngleX={5} tiltMaxAngleY={5} scale={1.05}>
                 <button 
                   className="main-choice-btn explore-choice"
-                  onClick={() => window.location.href = '/explore'}
+                  onClick={() => window.location.href = '/explore/index.html'}
                 >
                   <div className="choice-icon">🌍</div>
                   <h2>Tự do khám phá</h2>
