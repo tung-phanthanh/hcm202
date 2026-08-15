@@ -940,7 +940,7 @@ body.theme-festival {
 .chatbot-container {
   position: fixed;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
   z-index: 1050;
   pointer-events: auto;
 }
@@ -969,7 +969,7 @@ body.theme-festival {
 .chatbot-window {
   position: absolute;
   bottom: 60px;
-  left: 0;
+  right: 0;
   width: 320px;
   height: 400px;
   background-color: $container-background-color;
