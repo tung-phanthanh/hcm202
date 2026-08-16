@@ -54,7 +54,7 @@ export default function Chatbot() {
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Something went wrong');
       }
@@ -71,7 +71,7 @@ export default function Chatbot() {
   return (
     <div className="chatbot-container">
       {/* Chat toggle button */}
-      <button 
+      <button
         className={`chatbot-toggle ${isOpen ? 'open' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
         title="Trợ lý AI"
@@ -82,14 +82,14 @@ export default function Chatbot() {
       {/* Chat window */}
       <div className={`chatbot-window ${isOpen ? 'show' : ''}`}>
         <div className="chatbot-header">
-          <h3>Trợ lý AI Bác Hồ</h3>
+          <h3>Trợ lý AI</h3>
           {focusedMarker && (
             <span className="chatbot-context">
               📍 {focusedMarker.city} ({focusedMarker.year})
             </span>
           )}
         </div>
-        
+
         <div className="chatbot-messages">
           {messages.map((msg, idx) => (
             <div key={idx} className={`message-wrapper ${msg.role}`}>
@@ -109,8 +109,8 @@ export default function Chatbot() {
         </div>
 
         <form className="chatbot-input-area" onSubmit={handleSend}>
-          <input 
-            type="text" 
+          <input
+            type="text"
             placeholder="Đặt câu hỏi về Bác..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
